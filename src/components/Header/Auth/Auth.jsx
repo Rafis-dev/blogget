@@ -1,6 +1,5 @@
 import React from 'react';
 import style from './Auth.module.css';
-import login from './img/login.svg';
 import PropTypes from 'prop-types';
 
 export const Auth = ({ auth }) => {
