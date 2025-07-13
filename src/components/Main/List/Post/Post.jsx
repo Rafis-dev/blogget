@@ -6,6 +6,7 @@ import { Rating } from './Rating/Rating';
 import { PostHeader } from './PostHeader/PostHeader';
 import { PostImage } from './PostImage/PostImage';
 import { PostDate } from './PostDate/PostDate';
+import { DeletePost } from './DeletePost/DeletePost';
 
 export const Post = ({ postData }) => {
   const { title, author, ups, date } = postData;
@@ -15,6 +16,8 @@ export const Post = ({ postData }) => {
       <PostImage src={notphoto} alt={title} />
 
       <PostHeader title={title} author={author} />
+
+      <DeletePost />
 
       <Rating ups={ups} />
 
