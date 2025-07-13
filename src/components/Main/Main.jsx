@@ -1,11 +1,14 @@
-import React from "react";
-import style from "./Main.module.css";
-import Layout from "../Layout";
-
+import Layout from '../Layout';
+import Tabs from './Tabs';
+import List from './List';
+// eslint-disable-next-line
 export const Main = () => {
   return (
     <main>
-      <Layout></Layout>
+      <Layout>
+        <Tabs />
+        <List />
+      </Layout>
     </main>
   );
 };
