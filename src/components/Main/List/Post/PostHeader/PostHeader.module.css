@@ -33,9 +33,6 @@
 }
 
 @media (min-width: 580px) {
-  .linkPost {
-    font-size: 26px;
-  }
   .linkPost:hover {
     color: #cc6633;
   }
@@ -52,11 +49,5 @@
     grid-area: content;
     padding-top: 10px;
     padding-right: 40px;
-  }
-}
-
-@media (min-width: 768px) {
-  .linkPost {
-    font-size: 32px;
   }
 }

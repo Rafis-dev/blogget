@@ -1,6 +1,8 @@
-import React from "react";
-import style from "./Search.module.css";
+import React from 'react';
+import style from './Search.module.css';
 
+/* eslint-disable max-len */
+// eslint-disable-next-line
 export const Search = () => {
   return (
     <form className={style.form}>

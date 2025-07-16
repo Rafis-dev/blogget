@@ -1,11 +1,12 @@
-import React from "react";
-import style from "./Header.module.css";
-import Layout from "../Layout";
-import Logo from "./Logo";
-import Search from "./Search";
-import Auth from "./Auth";
-import Heading from "./Heading";
+import React from 'react';
+import style from './Header.module.css';
+import Layout from '../Layout';
+import Logo from './Logo';
+import Search from './Search';
+import Auth from './Auth';
+import Heading from './Heading';
 
+// eslint-disable-next-line
 export const Header = () => {
   return (
     <header className={style.header}>
