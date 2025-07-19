@@ -1,4 +1,3 @@
-import React from 'react';
 import style from './Header.module.css';
 import Layout from '../Layout';
 import Logo from './Logo';
@@ -8,7 +7,7 @@ import Heading from './Heading';
 import PropTypes from 'prop-types';
 
 // eslint-disable-next-line
-export const Header = ({ token }) => {
+export const Header = ({ token, delToken }) => {
   return (
     <header className={style.header}>
       <Layout>
@@ -16,7 +15,7 @@ export const Header = ({ token }) => {
           <Logo />
           <Heading text="Главная" />
           <Search />
-          <Auth token={token} />
+          <Auth token={token} delToken={delToken} />
         </div>
       </Layout>
     </header>

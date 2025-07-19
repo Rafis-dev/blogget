@@ -21,5 +21,14 @@ export const useToken = state => {
     }
   }, [token]);
 
-  return [token];
+  const delToken = () => {
+    setToken(null);
+    localStorage.removeItem('bearer');
+    // Очищаем hash из адресной строки
+    if (location.hash) {
+      window.history.replaceState({}, '', '/');
+    }
+  };
+
+  return [token, delToken];
 };
