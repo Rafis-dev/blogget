@@ -1,5 +1,5 @@
 import style from './Post.module.css';
-import notphoto from './img/notphoto.jpg';
+// import notphoto from './img/notphoto.jpg';
 import PropTypes from 'prop-types';
 import { formatDate } from '../../../../utils/formatDate';
 import { Rating } from './Rating/Rating';
@@ -9,11 +9,11 @@ import { PostDate } from './PostDate/PostDate';
 import { DeletePost } from './DeletePost/DeletePost';
 
 export const Post = ({ postData }) => {
-  const { title, author, ups, date } = postData;
+  const { title, author, ups, created, thumbnail } = postData;
 
   return (
     <li className={style.post}>
-      <PostImage src={notphoto} alt={title} />
+      <PostImage src={thumbnail} alt={title} />
 
       <PostHeader title={title} author={author} />
 
@@ -21,7 +21,7 @@ export const Post = ({ postData }) => {
 
       <Rating ups={ups} />
 
-      <PostDate dateTime={date}>{formatDate(date)}</PostDate>
+      <PostDate dateTime={created}>{formatDate(created)}</PostDate>
     </li>
   );
 };

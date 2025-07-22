@@ -3,45 +3,24 @@ import PropTypes from 'prop-types';
 import { ReactComponent as LoginIcon } from './img/login.svg';
 import { urlAuth } from '../../../api/auth';
 import { Text } from '../../../UI/Text';
-import { useEffect, useState } from 'react';
-import { URL_API } from '../../../api/const';
+import { useState, useContext } from 'react';
+import { tokenContext } from '../../../context/tokenContext';
+import { authContext } from '../../../context/authContext';
 /* eslint-disable max-len */
 // eslint-disable-next-line
-export const Auth = ({ token, delToken }) => {
-  const [auth, setAuth] = useState({});
+export const Auth = () => {
+  const { delToken } = useContext(tokenContext);
   const [logOutBtn, setLogOutBtn] = useState(false);
+  const { auth, clearAuth } = useContext(authContext);
 
   const showLogOut = () => {
     setLogOutBtn(prevLogOut => !prevLogOut);
   };
 
-  useEffect(() => {
-    if (!token) {
-      setAuth({});
-      return;
-    }
-
-    fetch(`${URL_API}/api/v1/me`, {
-      headers: {
-        Authorization: `bearer ${token}`,
-      },
-    })
-      .then(response => {
-        if (response.status === 401) {
-          delToken();
-          return;
-        }
-        return response.json();
-      })
-      .then(({ name, icon_img: iconImg }) => {
-        const img = iconImg.replace(/\?.*$/, '');
-        setAuth({ name, img });
-      })
-      .catch(err => {
-        console.log(err);
-        setAuth({});
-      });
-  }, [token]);
+  const logOut = () => {
+    delToken();
+    clearAuth();
+  };
 
   return (
     <div className={style.container}>
@@ -56,14 +35,7 @@ export const Auth = ({ token, delToken }) => {
             />
           </button>
           {logOutBtn && (
-            <button
-              onClick={() => {
-                delToken();
-                setLogOutBtn(false);
-              }}
-              type="button"
-              className={style.logout}
-            >
+            <button onClick={logOut} type="button" className={style.logout}>
               Выйти
             </button>
           )}

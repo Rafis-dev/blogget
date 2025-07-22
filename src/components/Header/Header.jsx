@@ -4,10 +4,9 @@ import Logo from './Logo';
 import Search from './Search';
 import Auth from './Auth';
 import Heading from './Heading';
-import PropTypes from 'prop-types';
 
 // eslint-disable-next-line
-export const Header = ({ token, delToken }) => {
+export const Header = () => {
   return (
     <header className={style.header}>
       <Layout>
@@ -15,13 +14,9 @@ export const Header = ({ token, delToken }) => {
           <Logo />
           <Heading text="Главная" />
           <Search />
-          <Auth token={token} delToken={delToken} />
+          <Auth />
         </div>
       </Layout>
     </header>
   );
-};
-
-Auth.propTypes = {
-  token: PropTypes.string,
 };
