@@ -9,13 +9,20 @@ import { PostDate } from './PostDate/PostDate';
 import { DeletePost } from './DeletePost/DeletePost';
 
 export const Post = ({ postData }) => {
-  const { title, author, ups, created, thumbnail } = postData;
+  const {
+    title,
+    author,
+    ups,
+    created,
+    thumbnail,
+    selftext: markdown,
+  } = postData;
 
   return (
     <li className={style.post}>
       <PostImage src={thumbnail} alt={title} />
 
-      <PostHeader title={title} author={author} />
+      <PostHeader title={title} author={author} markdown={markdown} />
 
       <DeletePost />
 
