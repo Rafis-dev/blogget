@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Modal from '../../../../Modal';
 import PropTypes from 'prop-types';
 // eslint-disable-next-line
-export const PostHeader = ({ title, author, markdown }) => {
+export const PostHeader = ({ title, author, markdown, id }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   return (
     <div className={style.content}>
@@ -37,6 +37,7 @@ export const PostHeader = ({ title, author, markdown }) => {
           markdown={markdown}
           title={title}
           author={author}
+          id={id}
           closeModal={() => {
             setIsModalOpen(false);
           }}

@@ -16,13 +16,14 @@ export const Post = ({ postData }) => {
     created,
     thumbnail,
     selftext: markdown,
+    id,
   } = postData;
 
   return (
     <li className={style.post}>
       <PostImage src={thumbnail} alt={title} />
 
-      <PostHeader title={title} author={author} markdown={markdown} />
+      <PostHeader title={title} author={author} markdown={markdown} id={id} />
 
       <DeletePost />
 

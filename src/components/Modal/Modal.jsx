@@ -4,10 +4,15 @@ import PropTypes from 'prop-types';
 import Markdown from 'markdown-to-jsx';
 import ReactDOM from 'react-dom';
 import { useEffect, useRef } from 'react';
+import { Comments } from './Comments/Comments';
+import { useCommentsData } from '../../hooks/useCommentsData';
+import { FormComment } from './FormComment/FormComment';
 
-export const Modal = ({ markdown, title, author, closeModal }) => {
+export const Modal = ({ id, closeModal }) => {
   const overlayRef = useRef(null);
   const closeRef = useRef(null);
+
+  const { comments, loading, post } = useCommentsData(id);
 
   const handleClick = e => {
     const target = e.target;
@@ -32,6 +37,23 @@ export const Modal = ({ markdown, title, author, closeModal }) => {
     };
   }, []);
 
+  if (loading) {
+    return ReactDOM.createPortal(
+      <div className={style.overlay} ref={overlayRef}>
+        <div className={style.modal}>
+          <p className={style.title}>Загрузка...</p>
+
+          <button type="button" className={style.close} ref={closeRef}>
+            <CloseIcon />
+          </button>
+        </div>
+      </div>,
+      document.getElementById('modal-root')
+    );
+  }
+
+  const { title, author, selftext: markdown } = post;
+
   return ReactDOM.createPortal(
     <div className={style.overlay} ref={overlayRef}>
       <div className={style.modal}>
@@ -55,6 +77,10 @@ export const Modal = ({ markdown, title, author, closeModal }) => {
 
         <p className={style.author}>{author}</p>
 
+        <Comments comments={comments} />
+
+        <FormComment />
+
         <button type="button" className={style.close} ref={closeRef}>
           <CloseIcon />
         </button>
@@ -65,8 +91,6 @@ export const Modal = ({ markdown, title, author, closeModal }) => {
 };
 
 Modal.propTypes = {
-  title: PropTypes.string,
-  author: PropTypes.string,
-  markdown: PropTypes.string,
+  id: PropTypes.string,
   closeModal: PropTypes.func,
 };
