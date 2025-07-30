@@ -2,7 +2,6 @@ import style from './FormComment.module.css';
 import { Text } from '../../../UI/Text';
 import { useRef, useState, useEffect } from 'react';
 import { useAuth } from '../../../hooks/useAuth';
-import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateComment } from '../../../store';
 
@@ -59,8 +58,4 @@ export const FormComment = () => {
       )}
     </>
   );
-};
-
-FormComment.propTypes = {
-  id: PropTypes.string,
 };

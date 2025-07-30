@@ -18,9 +18,8 @@ export const updateToken = token => ({
   type: UPDATE_TOKEN,
   token,
 });
-export const deleteToken = token => ({
+export const deleteToken = () => ({
   type: DELETE_TOKEN,
-  token,
 });
 
 const rootReducer = (state = initialState, action) => {
@@ -34,7 +33,7 @@ const rootReducer = (state = initialState, action) => {
       setToken(action.token);
       return {
         ...state,
-        comment: action.token,
+        token: action.token,
       };
     case DELETE_TOKEN:
       setToken('');

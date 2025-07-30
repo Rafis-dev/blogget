@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 import { URL_API } from '../api/const';
-import { getToken } from '../api/token';
+import { useSelector } from 'react-redux';
 
 export const useCommentsData = id => {
   const [post, setPost] = useState(null); // Данные поста
   const [comments, setComments] = useState([]); // Массив комментариев
   const [loading, setLoading] = useState(true);
-  const token = getToken();
+  const token = useSelector(state => state.token);
 
   useEffect(() => {
     if (!token) return;

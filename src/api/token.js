@@ -1,28 +1,27 @@
 export const setToken = token => {
-  if (token) {
-    localStorage.setItem('bearer', token);
-  } else {
-    localStorage.removeItem('bearer');
-  }
+  localStorage.setItem('bearer', token);
 };
 
 export const getToken = () => {
-  // Сначала проверяем localStorage
-  const token = localStorage.getItem('bearer');
-  if (token) {
-    return token;
-  }
+  let token = '';
 
-  // Если токена нет в localStorage и путь содержит /auth, извлекаем из хэша
   if (location.pathname.includes('/auth')) {
-    const newToken = new URLSearchParams(location.hash.substring(1)).get(
-      'access_token'
-    );
-    if (newToken) {
-      setToken(newToken);
-      return newToken;
-    }
+    token = new URLSearchParams(location.hash.substring(1)).get('access_token');
+    setToken(token);
   }
 
-  return '';
+  if (localStorage.getItem('bearer')) {
+    setToken(localStorage.getItem('bearer'));
+  }
+
+  return token;
 };
+
+// const delToken = () => {
+//   setToken(null);
+//   localStorage.removeItem('bearer');
+//   // Очищаем hash из адресной строки
+//   if (location.hash) {
+//     window.history.replaceState({}, '', '/');
+//   }
+// };

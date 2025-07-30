@@ -6,11 +6,12 @@ import { Text } from '../../../UI/Text';
 import { useState, useContext } from 'react';
 
 import { authContext } from '../../../context/authContext';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { deleteToken } from '../../../store';
 /* eslint-disable max-len */
 // eslint-disable-next-line
 export const Auth = () => {
+  const token = useSelector(state => state.token);
   const dispatch = useDispatch();
   const [logOutBtn, setLogOutBtn] = useState(false);
   const { auth, clearAuth } = useContext(authContext);
@@ -20,7 +21,7 @@ export const Auth = () => {
   };
 
   const logOut = () => {
-    dispatch(deleteToken());
+    dispatch(deleteToken(token));
     clearAuth();
   };
 
