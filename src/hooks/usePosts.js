@@ -7,7 +7,10 @@ export const usePosts = () => {
   const token = useSelector(state => state.token);
 
   useEffect(() => {
-    if (!token) return;
+    if (!token) {
+      setPosts([]);
+      return;
+    }
 
     fetch(`${URL_API}/best`, {
       headers: {

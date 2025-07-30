@@ -6,7 +6,6 @@ import { deleteToken } from '../store';
 export const useAuth = () => {
   const [auth, setAuth] = useState({});
   const token = useSelector(state => state.token);
-
   const dispatch = useDispatch();
 
   useEffect(() => {

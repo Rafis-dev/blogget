@@ -1,3 +1,4 @@
+/* eslint-disable */
 import style from './Auth.module.css';
 import PropTypes from 'prop-types';
 import { ReactComponent as LoginIcon } from './img/login.svg';
@@ -11,7 +12,6 @@ import { deleteToken } from '../../../store';
 /* eslint-disable max-len */
 // eslint-disable-next-line
 export const Auth = () => {
-  const token = useSelector(state => state.token);
   const dispatch = useDispatch();
   const [logOutBtn, setLogOutBtn] = useState(false);
   const { auth, clearAuth } = useContext(authContext);
@@ -21,8 +21,11 @@ export const Auth = () => {
   };
 
   const logOut = () => {
-    dispatch(deleteToken(token));
+    dispatch(deleteToken());
     clearAuth();
+    if (location.hash) {
+      window.history.replaceState({}, '', '/');
+    }
   };
 
   return (
