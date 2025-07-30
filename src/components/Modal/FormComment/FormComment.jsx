@@ -2,18 +2,27 @@ import style from './FormComment.module.css';
 import { Text } from '../../../UI/Text';
 import { useRef, useState, useEffect } from 'react';
 import { useAuth } from '../../../hooks/useAuth';
+import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateComment } from '../../../store';
 
 export const FormComment = () => {
+  const value = useSelector(state => state.comment);
+  const dispatch = useDispatch();
   const [auth] = useAuth();
   const [formVisible, setFormVisible] = useState(false);
-  const textRef = useRef(null);
   const formRef = useRef(null);
+  const textRef = useRef(null);
 
   const handleSubmit = e => {
     e.preventDefault();
-    console.log(textRef.current.value);
+    console.log(value);
     formRef.current.reset();
     setFormVisible(false);
+  };
+
+  const handleChange = e => {
+    dispatch(updateComment(e.target.value));
   };
 
   useEffect(() => {
@@ -21,6 +30,12 @@ export const FormComment = () => {
       textRef.current.focus();
     }
   }, [formVisible]);
+
+  useEffect(() => {
+    if (value) {
+      setFormVisible(true);
+    }
+  }, [value]);
 
   return (
     <>
@@ -33,10 +48,19 @@ export const FormComment = () => {
           <Text As="h3" size={14} tsize={18}>
             {auth.name}
           </Text>
-          <textarea className={style.textarea} ref={textRef}></textarea>
+          <textarea
+            className={style.textarea}
+            value={value}
+            onChange={handleChange}
+            ref={textRef}
+          ></textarea>
           <button className={style.btn}>Отправить</button>
         </form>
       )}
     </>
   );
+};
+
+FormComment.propTypes = {
+  id: PropTypes.string,
 };
