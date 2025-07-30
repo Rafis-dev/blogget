@@ -4,12 +4,14 @@ import { ReactComponent as LoginIcon } from './img/login.svg';
 import { urlAuth } from '../../../api/auth';
 import { Text } from '../../../UI/Text';
 import { useState, useContext } from 'react';
-import { tokenContext } from '../../../context/tokenContext';
+
 import { authContext } from '../../../context/authContext';
+import { useDispatch } from 'react-redux';
+import { deleteToken } from '../../../store';
 /* eslint-disable max-len */
 // eslint-disable-next-line
 export const Auth = () => {
-  const { delToken } = useContext(tokenContext);
+  const dispatch = useDispatch();
   const [logOutBtn, setLogOutBtn] = useState(false);
   const { auth, clearAuth } = useContext(authContext);
 
@@ -18,7 +20,7 @@ export const Auth = () => {
   };
 
   const logOut = () => {
-    delToken();
+    dispatch(deleteToken());
     clearAuth();
   };
 

@@ -1,12 +1,12 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import { URL_API } from '../api/const';
-import { tokenContext } from '../context/tokenContext';
+import { getToken } from '../api/token';
 
 export const useCommentsData = id => {
   const [post, setPost] = useState(null); // Данные поста
   const [comments, setComments] = useState([]); // Массив комментариев
   const [loading, setLoading] = useState(true);
-  const { token } = useContext(tokenContext);
+  const token = getToken();
 
   useEffect(() => {
     if (!token) return;
