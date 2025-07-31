@@ -1,5 +1,6 @@
 import { createStore } from 'redux';
 import { getToken, setToken } from '../api/token';
+import { composeWithDevTools } from '@redux-devtools/extension';
 
 const initialState = {
   comment: 'Привет, Redux',
@@ -47,4 +48,4 @@ const rootReducer = (state = initialState, action) => {
   }
 };
 
-export const store = createStore(rootReducer);
+export const store = createStore(rootReducer, composeWithDevTools());
