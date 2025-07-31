@@ -7,8 +7,8 @@ import { Text } from '../../../UI/Text';
 import { useState, useContext } from 'react';
 
 import { authContext } from '../../../context/authContext';
-import { useDispatch, useSelector } from 'react-redux';
-import { deleteToken } from '../../../store';
+import { useDispatch } from 'react-redux';
+import { deleteToken } from '../../../store/tokenReducer';
 /* eslint-disable max-len */
 // eslint-disable-next-line
 export const Auth = () => {

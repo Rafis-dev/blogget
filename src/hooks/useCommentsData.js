@@ -6,7 +6,7 @@ export const useCommentsData = id => {
   const [post, setPost] = useState(null); // Данные поста
   const [comments, setComments] = useState([]); // Массив комментариев
   const [loading, setLoading] = useState(true);
-  const token = useSelector(state => state.token);
+  const token = useSelector(state => state.tokenReducer.token);
 
   useEffect(() => {
     if (!token) return;
