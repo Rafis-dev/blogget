@@ -1,10 +1,9 @@
 import style from './List.module.css';
 import Post from './Post';
-import { useContext } from 'react';
-import { postsContext } from '../../../context/postsContext';
+import { usePosts } from '../../../hooks/usePosts';
 
 export const List = () => {
-  const { posts } = useContext(postsContext);
+  const [posts] = usePosts();
 
   return (
     <ul className={style.list}>
