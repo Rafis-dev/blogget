@@ -4,17 +4,17 @@ import PropTypes from 'prop-types';
 import { ReactComponent as LoginIcon } from './img/login.svg';
 import { urlAuth } from '../../../api/auth';
 import { Text } from '../../../UI/Text';
-import { useState, useContext } from 'react';
-
-import { authContext } from '../../../context/authContext';
+import { useState } from 'react';
+import AuthLoader from './AuthLoader';
 import { useDispatch } from 'react-redux';
 import { deleteToken } from '../../../store/tokenReducer';
+import { useAuth } from '../../../hooks/useAuth';
 /* eslint-disable max-len */
 // eslint-disable-next-line
 export const Auth = () => {
   const dispatch = useDispatch();
   const [logOutBtn, setLogOutBtn] = useState(false);
-  const { auth, clearAuth } = useContext(authContext);
+  const [auth, loading, clearAuth] = useAuth();
 
   const showLogOut = () => {
     setLogOutBtn(prevLogOut => !prevLogOut);
@@ -30,7 +30,9 @@ export const Auth = () => {
 
   return (
     <div className={style.container}>
-      {auth.name ? (
+      {loading ? (
+        <AuthLoader />
+      ) : auth.name ? (
         <>
           <button onClick={showLogOut} className={style.btn}>
             <img
