@@ -5,10 +5,10 @@ import { ReactComponent as LoginIcon } from './img/login.svg';
 import { urlAuth } from '../../../api/auth';
 import { Text } from '../../../UI/Text';
 import { useState } from 'react';
-import AuthLoader from './AuthLoader';
 import { useDispatch } from 'react-redux';
 import { useAuth } from '../../../hooks/useAuth';
 import { deleteToken } from '../../../store/token/tokenAction';
+import AuthLoader from '../../../UI/AuthLoader';
 /* eslint-disable max-len */
 // eslint-disable-next-line
 export const Auth = () => {

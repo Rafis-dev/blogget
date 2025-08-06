@@ -1,6 +1,9 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { commentRequestAsync } from '../store/postComments/postCommentsAction';
+import {
+  commentRequest,
+  commentRequestAsync,
+} from '../store/postComments/postCommentsAction';
 
 export const useCommentsData = id => {
   const token = useSelector(state => state.tokenReducer.token);
@@ -10,6 +13,7 @@ export const useCommentsData = id => {
   );
 
   useEffect(() => {
+    dispatch(commentRequest());
     dispatch(commentRequestAsync(id));
   }, [token, id]); // Обновляем при изменении token или id
 

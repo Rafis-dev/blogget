@@ -7,6 +7,7 @@ import { useEffect, useRef } from 'react';
 import { Comments } from './Comments/Comments';
 import { useCommentsData } from '../../hooks/useCommentsData';
 import { FormComment } from './FormComment/FormComment';
+import { CommentsLoader } from '../../UI/CommentsLoader/CommentsLoader';
 
 export const Modal = ({ id, closeModal }) => {
   const overlayRef = useRef(null);
@@ -44,7 +45,7 @@ export const Modal = ({ id, closeModal }) => {
     return ReactDOM.createPortal(
       <div className={style.overlay} ref={overlayRef}>
         <div className={style.modal}>
-          <p className={style.title}>Загрузка...</p>
+          <CommentsLoader />
 
           <button type="button" className={style.close} ref={closeRef}>
             <CloseIcon />

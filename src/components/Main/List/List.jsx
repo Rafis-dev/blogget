@@ -1,13 +1,14 @@
 import style from './List.module.css';
 import Post from './Post';
 import { usePosts } from '../../../hooks/usePosts';
+import { PostsLoader } from '../../../UI/PostsLoader/PostsLoader';
 
 export const List = () => {
   const [posts, loading] = usePosts();
 
   return (
     <>
-      {loading && <p>Загрузка</p>}
+      {loading && <PostsLoader className={style.loader} />}
 
       {!loading && (
         <ul className={style.list}>
