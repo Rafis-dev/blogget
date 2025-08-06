@@ -1,44 +1,18 @@
-import { useState, useEffect } from 'react';
-import { URL_API } from '../api/const';
-import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { commentRequestAsync } from '../store/postComments/postCommentsAction';
 
 export const useCommentsData = id => {
-  const [post, setPost] = useState(null); // Данные поста
-  const [comments, setComments] = useState([]); // Массив комментариев
-  const [loading, setLoading] = useState(true);
   const token = useSelector(state => state.tokenReducer.token);
+  const dispatch = useDispatch();
+  const { post, comments, status } = useSelector(
+    state => state.postCommentsReducer
+  );
 
   useEffect(() => {
-    if (!token) return;
-
-    fetch(`${URL_API}/comments/${id}`, {
-      headers: {
-        Authorization: `bearer ${token}`,
-      },
-    })
-      .then(response => {
-        if (response.status === 401) {
-          throw new Error('Unauthorized (401)');
-        }
-        return response.json();
-      })
-      .then(([postData, commentsData]) => {
-        // Разбираем данные поста
-        const postInfo = postData.data.children[0].data;
-
-        // Разбираем массив комментариев
-        const commentsList = commentsData.data.children.map(item => item.data);
-
-        // Сохраняем в стейт
-        setPost(postInfo);
-        setComments(commentsList);
-      })
-      .catch(err => {
-        console.error('Ошибка при получении данных с Reddit:', err);
-      })
-      .finally(() => setLoading(false));
+    dispatch(commentRequestAsync(id));
   }, [token, id]); // Обновляем при изменении token или id
 
   // Возвращаем объект, чтобы было читаемо
-  return { post, comments, loading };
+  return { post, comments, status };
 };

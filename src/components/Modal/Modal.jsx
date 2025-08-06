@@ -12,11 +12,14 @@ export const Modal = ({ id, closeModal }) => {
   const overlayRef = useRef(null);
   const closeRef = useRef(null);
 
-  const { comments, loading, post } = useCommentsData(id);
+  const { post, comments, status } = useCommentsData(id);
 
   const handleClick = e => {
     const target = e.target;
-    if (target === overlayRef.current || closeRef.current.contains(target)) {
+    if (
+      target === overlayRef.current ||
+      (closeRef.current && closeRef.current.contains(target))
+    ) {
       closeModal();
     }
   };
@@ -37,7 +40,7 @@ export const Modal = ({ id, closeModal }) => {
     };
   }, []);
 
-  if (loading) {
+  if (status === 'loading') {
     return ReactDOM.createPortal(
       <div className={style.overlay} ref={overlayRef}>
         <div className={style.modal}>
@@ -52,42 +55,44 @@ export const Modal = ({ id, closeModal }) => {
     );
   }
 
-  const { title, author, selftext: markdown } = post;
+  if (status === 'loaded') {
+    const { title, author, selftext: markdown } = post;
 
-  return ReactDOM.createPortal(
-    <div className={style.overlay} ref={overlayRef}>
-      <div className={style.modal}>
-        <h2 className={style.title}>{title}</h2>
+    return ReactDOM.createPortal(
+      <div className={style.overlay} ref={overlayRef}>
+        <div className={style.modal}>
+          <h2 className={style.title}>{title}</h2>
 
-        <div className={style.content}>
-          <Markdown
-            options={{
-              overrides: {
-                a: {
-                  props: {
-                    target: '_blank',
+          <div className={style.content}>
+            <Markdown
+              options={{
+                overrides: {
+                  a: {
+                    props: {
+                      target: '_blank',
+                    },
                   },
                 },
-              },
-            }}
-          >
-            {markdown}
-          </Markdown>
+              }}
+            >
+              {markdown}
+            </Markdown>
+          </div>
+
+          <p className={style.author}>{author}</p>
+
+          <Comments comments={comments} />
+
+          <FormComment id={id} />
+
+          <button type="button" className={style.close} ref={closeRef}>
+            <CloseIcon />
+          </button>
         </div>
-
-        <p className={style.author}>{author}</p>
-
-        <Comments comments={comments} />
-
-        <FormComment id={id} />
-
-        <button type="button" className={style.close} ref={closeRef}>
-          <CloseIcon />
-        </button>
-      </div>
-    </div>,
-    document.getElementById('modal-root')
-  );
+      </div>,
+      document.getElementById('modal-root')
+    );
+  }
 };
 
 Modal.propTypes = {

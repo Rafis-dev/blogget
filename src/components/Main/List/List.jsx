@@ -4,7 +4,6 @@ import { usePosts } from '../../../hooks/usePosts';
 
 export const List = () => {
   const [posts, loading] = usePosts();
-  console.log(posts);
 
   return (
     <>
