@@ -3,12 +3,15 @@ import {
   POST_REQUEST_ERROR,
   POST_REQUEST_SUCCESS,
   POST_CLEAR,
+  POST_REQUEST_SUCCESS_AFTER,
 } from './postsAction';
 
 const initialState = {
   loading: false,
-  data: [],
+  posts: [],
   error: '',
+  after: '',
+  isLast: false,
 };
 
 export const postsReducer = (state = initialState, action) => {
@@ -22,9 +25,20 @@ export const postsReducer = (state = initialState, action) => {
     case POST_REQUEST_SUCCESS:
       return {
         ...state,
-        data: action.data,
+        posts: action.posts,
         error: '',
         loading: false,
+        after: action.after,
+        isLast: !action.after,
+      };
+    case POST_REQUEST_SUCCESS_AFTER:
+      return {
+        ...state,
+        posts: [...state.posts, ...action.posts],
+        error: '',
+        loading: false,
+        after: action.after,
+        isLast: !action.after,
       };
     case POST_REQUEST_ERROR:
       return {
@@ -37,7 +51,8 @@ export const postsReducer = (state = initialState, action) => {
         ...state,
         error: '',
         loading: false,
-        data: [],
+        posts: [],
+        after: '',
       };
     default:
       return state;

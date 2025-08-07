@@ -2,6 +2,7 @@ export const COMMENT_REQUEST = 'COMMENT_REQUEST';
 export const COMMENT_REQUEST_SUCCESS = 'COMMENT_REQUEST_SUCCESS';
 export const COMMENT_REQUEST_ERROR = 'COMMENT_REQUEST_ERROR';
 import { URL_API } from '../../api/const';
+import axios from 'axios';
 
 export const commentRequest = () => ({
   type: COMMENT_REQUEST,
@@ -26,7 +27,7 @@ export const commentRequestAsync = id => (dispatch, getState) => {
     return;
   }
 
-  fetch(`${URL_API}/comments/${id}`, {
+  axios(`${URL_API}/comments/${id}`, {
     headers: {
       Authorization: `bearer ${token}`,
     },
@@ -35,9 +36,8 @@ export const commentRequestAsync = id => (dispatch, getState) => {
       if (response.status === 401) {
         throw new Error('Unauthorized (401)');
       }
-      return response.json();
-    })
-    .then(([postData, commentsData]) => {
+
+      const [postData, commentsData] = response.data;
       // Разбираем данные поста
       const post = postData.data.children[0].data;
 
