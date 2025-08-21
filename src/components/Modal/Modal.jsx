@@ -8,8 +8,11 @@ import { Comments } from './Comments/Comments';
 import { useCommentsData } from '../../hooks/useCommentsData';
 import { FormComment } from './FormComment/FormComment';
 import { CommentsLoader } from '../../UI/CommentsLoader/CommentsLoader';
+import { useNavigate, useParams } from 'react-router-dom';
 
-export const Modal = ({ id, closeModal }) => {
+export const Modal = () => {
+  const { id, page } = useParams();
+  const navigate = useNavigate();
   const overlayRef = useRef(null);
   const closeRef = useRef(null);
 
@@ -21,14 +24,16 @@ export const Modal = ({ id, closeModal }) => {
       target === overlayRef.current ||
       (closeRef.current && closeRef.current.contains(target))
     ) {
-      closeModal();
+      // closeModal();
+      navigate(`/category/${page}`);
     }
   };
 
   const handleEscBtn = e => {
     const target = e.key;
     if (target === 'Escape') {
-      closeModal();
+      // closeModal();
+      navigate(`/category/${page}`);
     }
   };
 
@@ -82,9 +87,8 @@ export const Modal = ({ id, closeModal }) => {
 
           <p className={style.author}>{author}</p>
 
-          <Comments comments={comments} />
-
           <FormComment id={id} />
+          <Comments comments={comments} />
 
           <button type="button" className={style.close} ref={closeRef}>
             <CloseIcon />

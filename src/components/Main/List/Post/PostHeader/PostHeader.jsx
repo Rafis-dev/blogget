@@ -1,26 +1,18 @@
 import style from './PostHeader.module.css';
 import { Text } from '../../../../../UI/Text';
-import { useState } from 'react';
-import Modal from '../../../../Modal';
 import PropTypes from 'prop-types';
+import { Link, useParams } from 'react-router-dom';
 // eslint-disable-next-line
 export const PostHeader = ({ title, author, markdown, id }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const page = useParams();
   return (
     <div className={style.content}>
       <Text As="h2" className={style.title}>
-        <Text
-          As="a"
-          size={18}
-          tsize={24}
-          className={style.linkPost}
-          href="#post"
-          onClick={() => {
-            setIsModalOpen(true);
-          }}
-        >
-          {title}
-        </Text>
+        <Link className={style.linkPost} to={`/category/${page}/post/${id}`}>
+          <Text size={18} tsize={24} className={style.linkPost}>
+            {title}
+          </Text>
+        </Link>
       </Text>
       <Text
         As="a"
@@ -32,17 +24,6 @@ export const PostHeader = ({ title, author, markdown, id }) => {
       >
         {author}
       </Text>
-      {isModalOpen && (
-        <Modal
-          markdown={markdown}
-          title={title}
-          author={author}
-          id={id}
-          closeModal={() => {
-            setIsModalOpen(false);
-          }}
-        />
-      )}
     </div>
   );
 };

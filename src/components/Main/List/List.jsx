@@ -5,14 +5,20 @@ import { useRef, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { postsRequestAsync } from '../../../store/posts/postsAction';
 import { ScrollLoader } from '../../../UI/ScrollLoader/ScrollLoader';
+import { Outlet, useParams } from 'react-router-dom';
 
 export const List = () => {
   const { posts, loading } = useSelector(state => state.postsReducer);
   const [ScrolledTriggered, setScrolledTriggered] = useState(false);
   const endList = useRef(null);
   const dispatch = useDispatch();
+  const { page } = useParams();
   const isInitialLoading = loading && posts.length === 0;
   const isLoadingMore = loading && ScrolledTriggered && posts.length > 0;
+
+  useEffect(() => {
+    dispatch(postsRequestAsync(page));
+  }, [page]);
 
   useEffect(() => {
     if (loading || !endList.current) return;
@@ -54,6 +60,7 @@ export const List = () => {
         ))}
         <li ref={endList} className={style.end} />
       </ul>
+      <Outlet />
 
       {isLoadingMore && <ScrollLoader />}
     </>

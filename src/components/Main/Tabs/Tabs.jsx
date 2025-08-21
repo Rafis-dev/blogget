@@ -10,12 +10,13 @@ import { ReactComponent as HomeIcon } from './img/home.svg';
 import { ReactComponent as BestIcon } from './img/best.svg';
 import { ReactComponent as HotIcon } from './img/hot.svg';
 import { debounceRaf } from '../../../utils/debounce';
+import { useNavigate } from 'react-router-dom';
 
 const LIST = [
-  { value: 'Главная', Icon: HomeIcon },
-  { value: 'Топ', Icon: TopIcon },
-  { value: 'Лучшие', Icon: BestIcon },
-  { value: 'Горячие', Icon: HotIcon },
+  { value: 'Главная', Icon: HomeIcon, link: 'rising' },
+  { value: 'Топ', Icon: TopIcon, link: 'top' },
+  { value: 'Лучшие', Icon: BestIcon, link: 'best' },
+  { value: 'Горячие', Icon: HotIcon, link: 'hot' },
 ].map(assignId);
 
 // eslint-disable-next-line
@@ -23,6 +24,7 @@ export const Tabs = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDropdown, setIsDropdown] = useState(true);
   const [tabsBtn, setTabsBtn] = useState('add item');
+  const navigate = useNavigate();
 
   const handleTabsClick = value => {
     if (isDropdownOpen || isDropdown) {
@@ -64,12 +66,15 @@ export const Tabs = () => {
 
       {(isDropdownOpen || !isDropdown) && (
         <ul className={style.list} onClick={() => setIsDropdownOpen(false)}>
-          {LIST.map(({ value, id, Icon }) => (
+          {LIST.map(({ value, id, Icon, link }) => (
             <li key={id} className={style.item}>
               <Text
                 As="button"
                 className={style.btn}
-                onClick={() => handleTabsClick(value)}
+                onClick={() => {
+                  handleTabsClick(value);
+                  navigate(`/category/${link}`);
+                }}
               >
                 {value}
                 {Icon && <Icon width={30} height={30} />}
