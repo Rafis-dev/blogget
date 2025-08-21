@@ -37,10 +37,12 @@ export const postsRequestAsync = () => (dispatch, getState) => {
   const loading = getState().postsReducer.loading;
   const isLast = getState().postsReducer.isLast;
 
-  if (!token || loading || isLast) {
+  if (!token || loading) {
     dispatch(postsClear());
     return;
   }
+
+  if (isLast) return;
 
   dispatch(postsRequest());
 
