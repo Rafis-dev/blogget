@@ -23,14 +23,7 @@ const LIST = [
 export const Tabs = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDropdown, setIsDropdown] = useState(true);
-  const [tabsBtn, setTabsBtn] = useState('add item');
   const navigate = useNavigate();
-
-  const handleTabsClick = value => {
-    if (isDropdownOpen || isDropdown) {
-      setTabsBtn(value);
-    }
-  };
 
   const handleResize = () => {
     if (document.documentElement.clientWidth < 768) {
@@ -50,6 +43,11 @@ export const Tabs = () => {
     };
   }, []);
 
+  // вычисляем активный таб из текущего роута
+  const activeTab =
+    LIST.find(item => location.pathname.includes(item.link))?.value ||
+    'Выберите категорию';
+
   return (
     <div className={style.container}>
       {isDropdown && (
@@ -58,7 +56,7 @@ export const Tabs = () => {
             className={style.btn}
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
           >
-            {tabsBtn}
+            {activeTab}
             <ArrowIcon width={15} height={15} />
           </button>
         </div>
@@ -72,7 +70,6 @@ export const Tabs = () => {
                 As="button"
                 className={style.btn}
                 onClick={() => {
-                  handleTabsClick(value);
                   navigate(`/category/${link}`);
                 }}
               >

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Link, useParams } from 'react-router-dom';
 // eslint-disable-next-line
 export const PostHeader = ({ title, author, markdown, id }) => {
-  const page = useParams();
+  const { page } = useParams();
   return (
     <div className={style.content}>
       <Text As="h2" className={style.title}>
