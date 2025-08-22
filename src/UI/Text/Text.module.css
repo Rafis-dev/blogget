@@ -13,6 +13,9 @@
 .black {
   color: var(--black);
 }
+.red {
+  color: var(--red);
+}
 
 .orange {
   color: var(--orange);
