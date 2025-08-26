@@ -24,7 +24,6 @@ export const Modal = () => {
       target === overlayRef.current ||
       (closeRef.current && closeRef.current.contains(target))
     ) {
-      // closeModal();
       navigate(`/category/${page}`);
     }
   };
@@ -32,7 +31,6 @@ export const Modal = () => {
   const handleEscBtn = e => {
     const target = e.key;
     if (target === 'Escape') {
-      // closeModal();
       navigate(`/category/${page}`);
     }
   };
