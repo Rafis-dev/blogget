@@ -8,10 +8,11 @@ const initialState = {
   after: '',
   isLast: false,
   page: '',
+  currentRequestId: undefined,
 };
 
 export const postsSlice = createSlice({
-  name: 'posts',
+  name: 'posts/fetch',
   initialState,
   reducers: {
     postsClear: state => {
@@ -29,29 +30,32 @@ export const postsSlice = createSlice({
   },
   extraReducers: builder => {
     builder
-      .addCase(postsRequestAsync.pending, state => {
+      .addCase(postsRequestAsync.pending, (state, action) => {
         state.loading = true;
         state.error = '';
+        state.currentRequestId = action.meta.requestId;
       })
       .addCase(postsRequestAsync.fulfilled, (state, action) => {
-        const { children, after } = action.payload;
+        if (!action.payload) return;
+        if (state.currentRequestId !== action.meta.requestId) return;
 
-        if (after) {
-          // догрузка постов
-          state.posts = [...state.posts, ...children];
-        } else {
-          // первая загрузка
-          state.posts = [...children];
-        }
+        const { children, after } = action.payload;
+        // prettier-ignore
+        state.posts =
+          state.posts.length > 0 ?
+          [...state.posts, ...children] :
+          [...children];
 
         state.loading = false;
         state.error = '';
         state.after = after;
         state.isLast = !after;
+        state.currentRequestId = undefined;
       })
       .addCase(postsRequestAsync.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
+        state.currentRequestId = undefined;
       });
   },
 });
