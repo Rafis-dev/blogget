@@ -2,8 +2,8 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { authLogout, authRequestAsync } from '../store/auth/action';
-import { postsClear } from '../store/posts/postsAction';
 import { useNavigate } from 'react-router-dom';
+import { postsSlice } from '../store/posts/postsSlice';
 
 export const useAuth = () => {
   const auth = useSelector(state => state.auth.data);
@@ -18,7 +18,7 @@ export const useAuth = () => {
 
   const clearAuth = () => {
     dispatch(authLogout());
-    dispatch(postsClear());
+    dispatch(postsSlice.actions.postsClear());
     navigate('/');
   };
 
