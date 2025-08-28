@@ -8,7 +8,6 @@ const initialState = {
   after: '',
   isLast: false,
   page: '',
-  currentRequestId: undefined,
 };
 
 export const postsSlice = createSlice({
@@ -24,38 +23,40 @@ export const postsSlice = createSlice({
 
     changePage: (state, action) => {
       state.page = action.payload;
+      state.posts = [];
       state.after = '';
       state.isLast = false;
     },
   },
   extraReducers: builder => {
     builder
-      .addCase(postsRequestAsync.pending, (state, action) => {
+      .addCase(postsRequestAsync.pending, state => {
         state.loading = true;
         state.error = '';
-        state.currentRequestId = action.meta.requestId;
       })
       .addCase(postsRequestAsync.fulfilled, (state, action) => {
         if (!action.payload) return;
-        if (state.currentRequestId !== action.meta.requestId) return;
 
         const { children, after } = action.payload;
+
+        const newPosts = children.filter(
+          newPost =>
+            !state.posts.some(oldPost => oldPost.data.id === newPost.data.id)
+        );
         // prettier-ignore
         state.posts =
           state.posts.length > 0 ?
-          [...state.posts, ...children] :
+          [...state.posts, ...newPosts] :
           [...children];
 
         state.loading = false;
         state.error = '';
         state.after = after;
         state.isLast = !after;
-        state.currentRequestId = undefined;
       })
       .addCase(postsRequestAsync.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
-        state.currentRequestId = undefined;
       });
   },
 });
