@@ -8,7 +8,6 @@ const initialState = {
   after: '',
   isLast: false,
   page: '',
-  currentRequestId: undefined,
 };
 
 export const postsSlice = createSlice({
@@ -26,18 +25,17 @@ export const postsSlice = createSlice({
       state.page = action.payload;
       state.after = '';
       state.isLast = false;
+      state.posts = [];
     },
   },
   extraReducers: builder => {
     builder
-      .addCase(postsRequestAsync.pending, (state, action) => {
+      .addCase(postsRequestAsync.pending, state => {
         state.loading = true;
         state.error = '';
-        state.currentRequestId = action.meta.requestId;
       })
       .addCase(postsRequestAsync.fulfilled, (state, action) => {
         if (!action.payload) return;
-        if (state.currentRequestId !== action.meta.requestId) return;
 
         const { children, after } = action.payload;
         // prettier-ignore
@@ -55,7 +53,6 @@ export const postsSlice = createSlice({
       .addCase(postsRequestAsync.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
-        state.currentRequestId = undefined;
       });
   },
 });

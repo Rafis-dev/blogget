@@ -10,7 +10,6 @@ export const postsRequestAsync = createAsyncThunk(
 
     if (newPage) {
       page = newPage;
-      dispatch(postsSlice.actions.postsClear());
       dispatch(postsSlice.actions.changePage(page));
     }
 
