@@ -19,6 +19,7 @@ export const Main = () => {
         <Routes>
           <Route path="/" element={<HomePage token={token} />} />
           <Route path="/auth" element={<HomePage token={token} />} />
+          <Route path="/blogget" element={<HomePage token={token} />} />
 
           <Route
             path="/category/:page"

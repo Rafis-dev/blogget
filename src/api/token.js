@@ -5,7 +5,10 @@ export const setToken = token => {
 export const getToken = () => {
   let token = localStorage.getItem('bearer') || '';
 
-  if (!token && location.pathname.includes('/auth')) {
+  if (
+    (!token && location.pathname.includes('/auth')) ||
+    (!token && window.location.hash.startsWith('#access_token='))
+  ) {
     token =
       new URLSearchParams(location.hash.substring(1)).get('access_token') || '';
     setToken(token);
