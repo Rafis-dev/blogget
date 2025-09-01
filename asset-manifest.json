@@ -1,0 +1,30 @@
+{
+  "files": {
+    "main.css": "/rafis-dev.github.io/blogget/static/css/main.0e6e5c75.css",
+    "main.js": "/rafis-dev.github.io/blogget/static/js/main.08fbc574.js",
+    "static/media/merriweather-sans-v20-latin_cyrillic-ext-700.woff": "/rafis-dev.github.io/blogget/static/media/merriweather-sans-v20-latin_cyrillic-ext-700.d14ade0212b2a8541413.woff",
+    "static/media/merriweather-sans-v20-latin_cyrillic-ext-500.woff": "/rafis-dev.github.io/blogget/static/media/merriweather-sans-v20-latin_cyrillic-ext-500.2206a760c25c43b14af8.woff",
+    "static/media/merriweather-sans-v20-latin_cyrillic-ext-regular.woff": "/rafis-dev.github.io/blogget/static/media/merriweather-sans-v20-latin_cyrillic-ext-regular.44846330ef5e4435929c.woff",
+    "static/media/merriweather-sans-v20-latin_cyrillic-ext-700.woff2": "/rafis-dev.github.io/blogget/static/media/merriweather-sans-v20-latin_cyrillic-ext-700.e85ac293918fc6af7b45.woff2",
+    "static/media/merriweather-sans-v20-latin_cyrillic-ext-500.woff2": "/rafis-dev.github.io/blogget/static/media/merriweather-sans-v20-latin_cyrillic-ext-500.72bde37dd57b911700f5.woff2",
+    "static/media/merriweather-sans-v20-latin_cyrillic-ext-regular.woff2": "/rafis-dev.github.io/blogget/static/media/merriweather-sans-v20-latin_cyrillic-ext-regular.4117fa953d231092315a.woff2",
+    "static/media/best.svg": "/rafis-dev.github.io/blogget/static/media/best.bdc35cdcd6156268464c80ad4f522bb4.svg",
+    "static/media/top.svg": "/rafis-dev.github.io/blogget/static/media/top.5db0937592cde6e0d61a78e8f0baacc4.svg",
+    "static/media/logo.svg": "/rafis-dev.github.io/blogget/static/media/logo.fd20c8e74bfa4b689b6849c7d7a2c659.svg",
+    "static/media/home.svg": "/rafis-dev.github.io/blogget/static/media/home.967450915b3e6a415ee435a81a9498f4.svg",
+    "static/media/hot.svg": "/rafis-dev.github.io/blogget/static/media/hot.490f97b97ea28edfff996bceb363cad4.svg",
+    "static/media/login.svg": "/rafis-dev.github.io/blogget/static/media/login.781338667dcbcfa5cb8f6dc9a51bd7a6.svg",
+    "static/media/close.svg": "/rafis-dev.github.io/blogget/static/media/close.f4c9900207807a8f06c7ea044523d204.svg",
+    "static/media/delete.svg": "/rafis-dev.github.io/blogget/static/media/delete.a2246a936643aa0da4449f1e71edfb94.svg",
+    "index.html": "/rafis-dev.github.io/blogget/index.html",
+    "static/media/arrow.svg": "/rafis-dev.github.io/blogget/static/media/arrow.032b89480d92b1bb23e64f92a28e7445.svg",
+    "static/media/up.svg": "/rafis-dev.github.io/blogget/static/media/up.1c426ad418b0a7d3d05c.svg",
+    "static/media/down.svg": "/rafis-dev.github.io/blogget/static/media/down.43603c59a9a1a57128ab.svg",
+    "main.0e6e5c75.css.map": "/rafis-dev.github.io/blogget/static/css/main.0e6e5c75.css.map",
+    "main.08fbc574.js.map": "/rafis-dev.github.io/blogget/static/js/main.08fbc574.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0e6e5c75.css",
+    "static/js/main.08fbc574.js"
+  ]
+}
